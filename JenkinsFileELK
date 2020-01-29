@@ -1,0 +1,83 @@
+pipeline {
+    agent any
+    stages {
+        stage('Deploy Elasticsearch'){
+            steps {
+                ansibleTower(
+                towerServer: 'TestTower',
+                templateType: 'job',
+                jobTemplate: 'Elasticsearch-Job',
+                importTowerLogs: true,
+                inventory: 'ELASTIC',
+                jobTags: '',
+                skipJobTags: '',
+                limit: '',
+                removeColor: false,
+                verbose: true,
+                credential: '',
+                extraVars: '''---
+    my_var:  "Jenkins Test"''',
+                async: false
+                )
+            }
+            post {
+                success {
+                    echo 'EVERYTHING IS OK!'
+                }
+            }
+        }
+        stage('Deploy Kibana'){
+            steps {
+                ansibleTower(
+                    towerServer: 'TestTower',
+                    templateType: 'job',
+                    jobTemplate: 'Kibana-Job',
+                    importTowerLogs: true,
+                    inventory: 'ELASTIC',
+                    jobTags: '',
+                    skipJobTags: '',
+                    limit: '',
+                    removeColor: false,
+                    verbose: true,
+                    credential: '',
+                    extraVars: '''---
+        my_var:  "Jenkins Test Kibana"''',
+                    async: false
+                )
+    }
+}
+        stage('Deploy Logstash'){
+            steps{
+                timeout(time:5, unit:'DAYS'){
+                    input message: 'Approve PROD Deployment?'
+                }
+
+                ansibleTower(
+                    towerServer: 'TestTower',
+                    templateType: 'job',
+                    jobTemplate: 'Logstash-Job',
+                    importTowerLogs: true,
+                    inventory: 'ELASTIC',
+                    jobTags: '',
+                    skipJobTags: '',
+                    limit: '',
+                    removeColor: false,
+                    verbose: true,
+                    credential: '',
+                    extraVars: '''---
+        my_var:  "Jenkins Test Kibana"''',
+                    async: false
+                )
+            }
+            post {
+                success {
+                    echo 'Code deployed to Prod'
+                }
+
+                failure {
+                    echo 'Deployment failed'
+                }
+           }
+       }
+    }
+}
