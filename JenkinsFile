@@ -1,0 +1,37 @@
+pipeline {
+    agent any
+    stages {
+        stage('Build'){
+            steps {
+                sh 'echo "KEKELE MEKELE"'
+            }
+            post {
+                success {
+                    echo 'SVE JE OK!'
+                }
+            }
+        }
+        stage('Deploy to staging'){
+            steps {
+                build job: 'Test sh'
+    }
+}
+        stage('Deploy to prod'){
+            steps{
+                timeout(time:5, unit:'DAYS'){
+                    input message: 'Approve PROD Deployment?'
+                }
+
+                build job: 'Deploy to prod'
+            }
+            post {
+                success {
+                    echo 'Code deployed to Prod'
+                }
+
+                failure {
+                    echo 'Deployment failed'
+                }
+    }
+}
+    }
