@@ -13,11 +13,11 @@ pipeline {
                     //def deploy_prod_verify() {
                         stage ('Verify'){
                             try {
-                                input id: 'Deploy', message: 'Is Blue node fine? Proceed with Green node deployment?', ok: 'Deploy!'
+                                input id: 'Deploy', message: 'Approve prod deployment', ok: 'Proceed'
                                 echo 'You pressed OK'
                             } catch (error) {
                                 echo 'You pressed'
-                                return 0
+                                error('Failed to build')
                             }
                         }
                       }
