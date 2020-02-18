@@ -9,16 +9,12 @@ pipeline {
                        stage ('Verify'){
                             try {
                                 input id: 'Deploy', message: 'Approve prod deployment', ok: 'Proceed'
-                                echo 'You pressed OK'
-                                steps{
-                                    build job: 'CF'
-                                }
+                                echo 'You pressed OK'                   
+                                build job: 'CF'
+                                
                             } catch (error) {
                                 echo 'You pressed'
-                                steps{
-                                    build job: 'CF delete'
-
-                                }
+                                build job: 'CF delete'
                                 error('Failed to build')
                             }
                         }
