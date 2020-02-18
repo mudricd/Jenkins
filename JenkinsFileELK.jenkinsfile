@@ -14,9 +14,9 @@ pipeline {
                         stage ('Verify'){
                             try {
                                 input id: 'Deploy', message: 'Is Blue node fine? Proceed with Green node deployment?', ok: 'Deploy!'
-                                do whatever you need...
+                                echo 'You pressed OK'
                             } catch (error) {
-                                If an error is caught... do this...
+                                echo 'You pressed Abort'
                             }
                         }
 }
