@@ -32,14 +32,14 @@ pipeline {
                 jobTemplate: 'Elasticsearch',
                 importTowerLogs: true,
                 inventory: 'AWS dynamic inventory',
-                jobTags: '',
+                jobTags: 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
                 skipJobTags: '',
                 limit: '',
                 removeColor: false,
                 verbose: true,
                 credential: '',
                 extraVars: '''---
-    my_var:  "Jenkins Test"''',
+                my_var:  "Jenkins Test"''',
                 async: false
                 )
             }
@@ -64,7 +64,7 @@ pipeline {
                     verbose: true,
                     credential: '',
                     extraVars: '''---
-        my_var:  "Jenkins Test Kibana"''',
+                    my_var:  "Jenkins Test Kibana"''',
                     async: false
                 )
     }
@@ -84,7 +84,7 @@ pipeline {
                     verbose: true,
                     credential: '',
                     extraVars: '''---
-        my_var:  "Jenkins Test Kibana"''',
+                    my_var:  "Jenkins Test Kibana"''',
                     async: false
                 )
             }
