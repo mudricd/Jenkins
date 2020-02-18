@@ -4,13 +4,16 @@ pipeline {
     stages {
         stage('Deploy Elasticsearch'){
             steps {
+                
+                build job: 'CF'
+
                 script{
                      timeout(time:5, unit:'DAYS'){   
                        stage ('Verify'){
                             try {
                                 input id: 'Deploy', message: 'Approve prod deployment', ok: 'Proceed'
                                 echo 'You pressed OK'                   
-                                build job: 'CF'
+                                
                                 
                             } catch (error) {
                                 echo 'You pressed'
@@ -20,6 +23,7 @@ pipeline {
                         }
                       }
                 }
+
                 ansibleTower(
                 towerServer: 'TestTower',
                 templateType: 'job',
