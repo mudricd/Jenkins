@@ -4,28 +4,26 @@ pipeline {
     stages {
         stage('Deploy Elasticsearch'){
             steps {
-                // timeout(time:5, unit:'DAYS'){
-                //     input message: 'Approve PROD Deployment?'
-                // }
-
                 script{
-
-                    //def deploy_prod_verify() {
                      timeout(time:5, unit:'DAYS'){   
                        stage ('Verify'){
                             try {
                                 input id: 'Deploy', message: 'Approve prod deployment', ok: 'Proceed'
                                 echo 'You pressed OK'
+                                steps{
+                                    build job: 'CF'
+                                }
                             } catch (error) {
                                 echo 'You pressed'
+                                steps{
+                                    build job: 'CF delete'
+
+                                }
                                 error('Failed to build')
                             }
                         }
                       }
                 }
-
-                //}
-
                 ansibleTower(
                 towerServer: 'TestTower',
                 templateType: 'job',
