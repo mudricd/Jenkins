@@ -76,7 +76,7 @@ pipeline {
             }
             post {
                 success {
-                    echo 'Code deployed successfully!
+                    echo 'Code deployed successfully!'
                 }
 
                 failure {
