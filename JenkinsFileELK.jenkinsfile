@@ -32,7 +32,7 @@ pipeline {
                 jobTemplate: 'Elasticsearch',
                 importTowerLogs: true,
                 inventory: 'AWS dynamic inventory',
-                jobTags: 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
+                jobTags: 'jobTags',
                 skipJobTags: '',
                 limit: '',
                 removeColor: false,
