@@ -4,11 +4,25 @@ pipeline {
     stages {
         stage('Deploy Elasticsearch'){
             steps {
-                timeout(time:5, unit:'DAYS'){
-                    input message: 'Approve PROD Deployment?'
-                    catchError { // input false
-                      echo "Aborted by: UNIS"
-                }
+                // timeout(time:5, unit:'DAYS'){
+                //     input message: 'Approve PROD Deployment?'
+                // }
+
+                script{
+
+                    def deploy_prod_verify() {
+                        stage ('Verify'){
+                            try {
+                                input id: 'Deploy', message: 'Is Blue node fine? Proceed with Green node deployment?', ok: 'Deploy!'
+                                do whatever you need...
+                            } catch (error) {
+                                If an error is caught... do this...
+                            }
+                        }
+}
+
+
+
                 }
 
                 ansibleTower(
