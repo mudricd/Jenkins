@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Deploy Elasticsearch'){
             steps {
-                
+
                 build job: 'CF'
 
                 script{
@@ -12,7 +12,8 @@ pipeline {
                        stage ('Verify'){
                             try {
                                 input id: 'Deploy', message: 'Approve prod deployment', ok: 'Proceed'
-                                echo 'You pressed OK'                   
+                                echo 'You pressed OK' 
+                                build job: 'CF delete'                  
                                 
                                 
                             } catch (error) {
