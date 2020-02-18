@@ -8,7 +8,7 @@ pipeline {
                 //     input message: 'Approve PROD Deployment?'
                 // }
 
-                //****script{
+                script{
 
                     //def deploy_prod_verify() {
                        stage ('Verify'){
@@ -20,7 +20,7 @@ pipeline {
                                 error('Failed to build')
                             }
                         }
-                      //****}
+                      }
 
                 //}
 
