@@ -2,9 +2,8 @@
 pipeline {
     agent any
     stages {
-        stage('Deploy Elasticsearch'){
-            steps {
-
+        stage('Build test environment'){
+            steps{
                 build job: 'CF'
 
                 script{
@@ -14,17 +13,19 @@ pipeline {
                                 input id: 'Deploy', message: 'Approve prod deployment', ok: 'Proceed'
                                 echo 'You pressed OK' 
                                 build job: 'CF delete'                  
-                                
-                                
+                                                   
                             } catch (error) {
                                 echo 'You pressed'
                                 build job: 'CF delete'
                                 error('Failed to build')
                             }
                         }
-                      }
+                    }
                 }
-
+            }
+        }
+        stage('Deploy Elasticsearch'){
+            steps {
                 ansibleTower(
                 towerServer: 'TestTower',
                 templateType: 'job',
