@@ -18,8 +18,7 @@ pipeline {
                                 echo 'You pressed OK'
                             } catch (error) {
                                 echo 'You pressed'
-                                throw e
-                                //error('Failed to build')
+                                error('Failed to build')
                             }
                         }
                       }
