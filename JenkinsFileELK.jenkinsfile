@@ -11,7 +11,7 @@ pipeline {
                 //****script{
 
                     //def deploy_prod_verify() {
-                       //**** stage ('Verify'){
+                       stage ('Verify'){
                             try {
                                 input id: 'Deploy', message: 'Approve prod deployment', ok: 'Proceed'
                                 echo 'You pressed OK'
@@ -19,7 +19,7 @@ pipeline {
                                 echo 'You pressed'
                                 error('Failed to build')
                             }
-                       //**** }
+                        }
                       //****}
 
                 //}
