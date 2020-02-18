@@ -1,3 +1,4 @@
+#!groovy​
 pipeline {
     agent any
     stages {
@@ -51,6 +52,10 @@ pipeline {
                 timeout(time:5, unit:'DAYS'){
                     input message: 'Approve PROD Deployment?'
                 }
+                catch(err) { // input false
+                  userInput = Abort
+                  echo "Aborted by: UNIS"
+                }
 
                 ansibleTower(
                     towerServer: 'TestTower',
@@ -71,11 +76,11 @@ pipeline {
             }
             post {
                 success {
-                    echo 'Code deployed to Prod'
+                    echo 'Code deployed successfully!
                 }
 
                 failure {
-                    echo 'Deployment failed'
+                    echo 'Deployment failed!'
                 }
            }
        }
