@@ -5,6 +5,22 @@ pipeline {
         stage('Build test environment'){
             steps{
                 build job: 'CF'
+                ansibleTower(
+                towerServer: 'TestTower',
+                templateType: 'job',
+                jobTemplate: 'Elasticsearch',
+                importTowerLogs: true,
+                inventory: 'AWS dynamic inventory',
+                jobTags: 'jobTags',
+                skipJobTags: '',
+                limit: '',
+                removeColor: false,
+                verbose: true,
+                credential: '',
+                extraVars: '''---
+                my_var:  "Jenkins Test"''',
+                async: false
+                )
 
                 script{
                      timeout(time:5, unit:'DAYS'){   
@@ -22,22 +38,7 @@ pipeline {
                         }
                     }
                 }
-                ansibleTower(
-                towerServer: 'TestTower',
-                templateType: 'job',
-                jobTemplate: 'Elasticsearch',
-                importTowerLogs: true,
-                inventory: 'AWS dynamic inventory',
-                jobTags: 'jobTags',
-                skipJobTags: '',
-                limit: '',
-                removeColor: false,
-                verbose: true,
-                credential: '',
-                extraVars: '''---
-                my_var:  "Jenkins Test"''',
-                async: false
-                )
+                
             }
         }
         stage('Deploy Elasticsearch'){
