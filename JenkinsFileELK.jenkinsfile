@@ -5,6 +5,7 @@ pipeline {
         stage('Build test environment'){
             steps{
                 build job: 'CF'
+                sleep(time:3,unit:"MINUTES")
                 ansibleTower(
                 towerServer: 'TestTower',
                 templateType: 'job',
