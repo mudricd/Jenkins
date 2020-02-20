@@ -5,7 +5,7 @@ pipeline {
         stage('Build test environment'){
             steps{
                 build job: 'CF'
-                sh 'pwd; sleep 180; echo "Sleeping for 3 minutes"'
+                sh 'echo "Sleeping 3 minutes until EC2 instances are up"; sleep 180; echo "End of sleeping"'
                 ansibleTower(
                 towerServer: 'TestTower',
                 templateType: 'job',
