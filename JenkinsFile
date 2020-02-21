@@ -4,7 +4,7 @@ pipeline {
         stage('Build'){
             steps {
                 sh 'echo "KEKELE MEKELE"'
-                withAWS(region:'eu-central-1',credentials:'nameOfSystemCredentials',federatedUserId:"${submitter}@${releaseVersion}", duration: '3600') {
+                withAWS(region:'us-east-1',credentials:'	AWS my personal') {
                   echo 'AWS plugin is OK'
                   // do something
 }
