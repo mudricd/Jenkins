@@ -106,11 +106,7 @@ pipeline {
                     async: false
                 )
             }
-        stage('Delete test environmet'){
-            steps{
-                build job: 'CF delete'
-            }
-        }
+
             post {
                 success {
                     echo 'Code deployed successfully!'
@@ -121,5 +117,10 @@ pipeline {
                 }
            }
        }
+        stage('Delete test environmet'){
+            steps{
+                build job: 'CF delete'
+            }
+        }
     }
 }
