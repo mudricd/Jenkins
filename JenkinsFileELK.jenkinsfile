@@ -85,8 +85,8 @@ pipeline {
                     my_var:  "Jenkins Test Kibana"''',
                     async: false
                 )
-    }
-}
+            }
+        }
         stage('Deploy Logstash'){
             steps{
                 ansibleTower(
@@ -120,6 +120,11 @@ pipeline {
         stage('Delete test environmet'){
             steps{
                 build job: 'CF delete'
+            }
+            post {
+                success {
+                    echo 'Test environment deleted successfully!'
+                }
             }
         }
     }
