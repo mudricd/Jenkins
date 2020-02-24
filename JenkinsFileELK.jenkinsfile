@@ -29,7 +29,7 @@ pipeline {
                             try {
                                 input id: 'Deploy', message: 'Approve prod deployment', ok: 'Proceed'
                                 echo 'You pressed Proceed' 
-                                build job: 'CF delete'                  
+                                                  
                                                    
                             } catch (error) {
                                 echo 'You pressed Abort'
@@ -106,6 +106,11 @@ pipeline {
                     async: false
                 )
             }
+        stage('Delete test environmet'){
+            steps{
+                build job: 'CF delete'
+            }
+        }
             post {
                 success {
                     echo 'Code deployed successfully!'
