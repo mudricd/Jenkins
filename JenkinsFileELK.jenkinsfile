@@ -13,7 +13,7 @@ pipeline {
                 importTowerLogs: true,
                 inventory: 'AWS dynamic inventory',
                 jobTags: '',
-                skipJobTags: 'prod',
+                skipJobTags: 'prod,nonprod',
                 limit: '',
                 removeColor: false,
                 verbose: true,
