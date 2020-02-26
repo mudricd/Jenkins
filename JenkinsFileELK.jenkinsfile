@@ -51,7 +51,7 @@ pipeline {
                 verbose: true,
                 credential: '',
                 extraVars: '''---
-                my_var:  "Jenkins Test''',
+                my_var:  "Jenkins Test"''',
                 async: false
                 )
 
