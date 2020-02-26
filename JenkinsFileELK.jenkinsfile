@@ -38,6 +38,22 @@ pipeline {
                 my_var:  "Jenkins"''',
                 async: false
                 )
+                ansibleTower(
+                towerServer: 'TestTower',
+                templateType: 'job',
+                jobTemplate: 'Logstash',
+                importTowerLogs: true,
+                inventory: 'AWS dynamic inventory',
+                jobTags: '',
+                skipJobTags: 'prod,nonprod',
+                limit: '',
+                removeColor: false,
+                verbose: true,
+                credential: '',
+                extraVars: '''---
+                my_var:  "Jenkins Test''',
+                async: false
+                )
 
                 script{
                      timeout(time:5, unit:'DAYS'){   
