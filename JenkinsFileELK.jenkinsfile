@@ -1,5 +1,5 @@
 // ELK Stack pipeline
-#!groovy​
+
 pipeline {
     agent any
     stages {
