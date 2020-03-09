@@ -2,28 +2,30 @@
 
 pipeline {
     agent any
+    options {
+    ansiColor('xterm')
+  }
     stages {
         stage('Build test environment'){
             steps{
                 build job: 'CF'
                 sh 'echo "Sleeping 3 minutes until EC2 instances are up"; sleep 180; echo "End of sleeping"'
-                wrap([$class: 'AnsiColorBuildWrapper', colorMapName: "xterm"]) {
-                  ansibleTower(
-                  towerServer: 'TestTower',
-                  templateType: 'job',
-                  jobTemplate: 'Elasticsearch',
-                  importTowerLogs: true,
-                  inventory: 'AWS dynamic inventory',
-                  jobTags: '',
-                  skipJobTags: 'prod,nonprod',
-                  limit: '',
-                  removeColor: false,
-                  verbose: true,
-                  credential: '',
-                  extraVars: '''---
-                  my_var:  "Jenkins"''',
-                  async: false
-                )}
+                ansibleTower(
+                towerServer: 'TestTower',
+                templateType: 'job',
+                jobTemplate: 'Elasticsearch',
+                importTowerLogs: true,
+                inventory: 'AWS dynamic inventory',
+                jobTags: '',
+                skipJobTags: 'prod,nonprod',
+                limit: '',
+                removeColor: false,
+                verbose: true,
+                credential: '',
+                extraVars: '''---
+                my_var:  "Jenkins"''',
+                async: false
+                )
                 ansibleTower(
                 towerServer: 'TestTower',
                 templateType: 'job',
