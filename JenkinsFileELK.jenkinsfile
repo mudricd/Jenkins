@@ -7,6 +7,7 @@ pipeline {
             steps{
                 build job: 'CF'
                 sh 'echo "Sleeping 3 minutes until EC2 instances are up"; sleep 180; echo "End of sleeping"'
+                wrap([$class: 'AnsiColorBuildWrapper', colorMapName: "xterm"]) {
                 ansibleTower(
                 towerServer: 'TestTower',
                 templateType: 'job',
@@ -22,7 +23,7 @@ pipeline {
                 extraVars: '''---
                 my_var:  "Jenkins"''',
                 async: false
-                )
+                )}
                 ansibleTower(
                 towerServer: 'TestTower',
                 templateType: 'job',
