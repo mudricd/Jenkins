@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Build test environment'){
             steps{
-                build job: 'CF'
+                build job: 'Build_Sandpit_CFN'
                 sh 'echo "Sleeping 3 minutes until EC2 instances are up"; sleep 180; echo "End of sleeping"'
                 ansibleTower(
                 towerServer: 'TestTower',
@@ -155,7 +155,7 @@ pipeline {
        }
         stage('Delete test environmet'){
             steps{
-                build job: 'CF delete'
+                build job: 'Delete_Sandpit_CFN'
             }
             post {
                 success {
